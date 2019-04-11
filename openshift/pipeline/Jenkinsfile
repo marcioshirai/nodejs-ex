@@ -1,6 +1,6 @@
 node('nodejs') {
-  stage 'build'
+  stage '1 - build'
   openshiftBuild(buildConfig: 'nodejs-example', showBuildLogs: 'true')
-  stage 'deploy'
+  stage '2 - deploy'
   openshiftDeploy(deploymentConfig: 'nodejs-example')
 }
