@@ -3,4 +3,7 @@ node('nodejs') {
   openshiftBuild(buildConfig: 'nodejs-example', showBuildLogs: 'true')
   stage '2 - deploy'
   openshiftDeploy(deploymentConfig: 'nodejs-example')
+  stage '3 - approve'
+  input 'Promote to production?'
+  }
 }
