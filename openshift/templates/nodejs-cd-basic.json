@@ -19,7 +19,7 @@
   "labels": {
       "template": "nodejs-cd-basic",
       "app": "${NAME}",
-      "author": "Marcio Shirai"
+      "author": "MarcioShirai"
   },
   "objects": [
     {
