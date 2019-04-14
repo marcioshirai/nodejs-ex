@@ -17,8 +17,9 @@
   },
   "message": "The following service(s) have been created in your project: ${NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/marcioshirai/nodejs-ex/blob/master/README.md.",
   "labels": {
-      "template": "${NAME}",
-      "app": "${NAME}"
+      "template": "nodejs-cd-basic",
+      "app": "${NAME}",
+      "author": "Marcio Shirai"
   },
   "objects": [
     {
