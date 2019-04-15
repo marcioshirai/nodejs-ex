@@ -39,8 +39,8 @@ oc create -f https://raw.githubusercontent.com/marcioshirai/nodejs-ex/master/ope
 oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/nodejs-sample-pipeline.yaml
 
 
-# now create the pipeline build controller from the openshift/pipeline
-# subdirectory
+#### now create the pipeline build controller from the openshift/pipeline
+#### subdirectory
 oc new-app https://github.com/marcioshirai/nodejs-ex --context-dir=openshift/pipeline --name nodejs-ex-pipeline
     * A pipeline build using source code from https://github.com/marcioshirai/nodejs-ex will be created
       * Use 'start-build' to trigger a new build
@@ -114,17 +114,17 @@ https://jfrog.com/blog/protect-your-containerized-microservices-on-openshift-usi
 Remotely Push and Pull Container Images to OpenShift
 https://blog.openshift.com/remotely-push-pull-container-images-openshift/
 
-# BALANCEAMENTO
+#### BALANCEAMENTO
 Deploying OpenShift Applications to Multiple Datacenters
 https://blog.openshift.com/deploying-openshift-applications-multiple-datacenters/
 
-# REDHAT
+#### REDHAT
 Promoting Applications Across Environments
 https://docs.openshift.com/container-platform/3.11/dev_guide/application_lifecycle/promoting_applications.html
 
 
 
-DEPLOY
+#### DEPLOY
 
 BUILD AND DEPLOYMENT OF JAVA APPLICATIONS ON OPENSHIFT CONTAINER PLATFORM 3
 https://access.redhat.com/documentation/en-us/reference_architectures/2017/html-single/build_and_deployment_of_java_applications_on_openshift_container_platform_3/index#examples
@@ -133,7 +133,7 @@ https://access.redhat.com/documentation/en-us/reference_architectures/2017/html-
 
 
 
-OPENSHIFT ORIGIN 
+#### OPENSHIFT ORIGIN 
 
 https://github.com/openshift/origin/tree/master/examples/hello-openshift
 
@@ -143,25 +143,25 @@ https://ruddra.com/posts/openshift-python-gunicorn-nginx-jenkins-pipelines-part-
 
 
 
-******************************************************
-Promoting Applications Across Environments
-******************************************************
+#### ******************************************************
+#### Promoting Applications Across Environments
+#### ******************************************************
 https://docs.openshift.com/container-platform/3.11/dev_guide/application_lifecycle/promoting_applications.html
 
 
 
-# ------------------------------------------------------------------------------------------------------
-DOCKER
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### DOCKER
+#### ------------------------------------------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------------------------------
-# DOWNLOAD DE IMAGEM DO OPENSHIFT DO PROJETO NODEJS-ECHO E UPLOAD NO DOCKER HUB
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### DOWNLOAD DE IMAGEM DO OPENSHIFT DO PROJETO NODEJS-ECHO E UPLOAD NO DOCKER HUB
+#### ------------------------------------------------------------------------------------------------------
 
 [root@vm-centos74 ~]# docker pull registry/nodejs-echo/nodejs-example:latest
 Error response from daemon: pull access denied for registry/nodejs-echo/nodejs-example, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
 
-# docker login OK
+#### docker login OK
 docker login -u admin -p $(oc whoami -t) 172.30.1.1:5000/nodejs-echo/nodejs-example
 
 	WARNING! Using --password via the CLI is insecure. Use --password-stdin.
@@ -178,48 +178,48 @@ docker run -p 8080:8080 -d shirai/development
 curl -k localhost:8080
 
 
-# ------------------------------------------------------------------------------------------------------
-UPLOAD DE IMAGEM DO DOCKER HUB NO IMAGE STREAM NO OPENSHIFT PROJETO DEVELOPMENT
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### UPLOAD DE IMAGEM DO DOCKER HUB NO IMAGE STREAM NO OPENSHIFT PROJETO DEVELOPMENT
+#### ------------------------------------------------------------------------------------------------------
 oc login https://192.168.0.201:8443 --token=HOUgRPiK-3HhVslRePD4gBSsBfnWSWa5Nk_fXLLyHKw
 docker login -u admin -p $(oc whoami -t) 172.30.1.1:5000/development
 docker tag shirai/development 172.30.1.1:5000/development/test1
 docker push 172.30.1.1:5000/development/test1
 
 
-# ------------------------------------------------------------------------------------------------------
-# removendo toda app
-# ------------------------------------------------------------------------------------------------------
-# oc delete all -l <label>=<valor>
+#### ------------------------------------------------------------------------------------------------------
+#### removendo toda app
+#### ------------------------------------------------------------------------------------------------------
+##### oc delete all -l <label>=<valor>
 oc delete all -l app=marcio
 
-# ------------------------------------------------------------------------------------------------------
-# criando apps de templates
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### criando apps de templates
+#### ------------------------------------------------------------------------------------------------------
 https://docs.okd.io/3.11/dev_guide/application_lifecycle/new_app.html
 
-# ------------------------------------------------------------------------------------------------------
-# usando o arquivo de template do nodejs exemplo
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### usando o arquivo de template do nodejs exemplo
+#### ------------------------------------------------------------------------------------------------------
 oc new-app -f nodejs.json
 
-# ------------------------------------------------------------------------------------------------------
-# criando a partir do template file e alterando parametro NAME
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### criando a partir do template file e alterando parametro NAME
+#### ------------------------------------------------------------------------------------------------------
 oc new-app -f nodejs.json -p NAME=new-name
 
 
-# ------------------------------------------------------------------------------------------------------
-# Template Parameters
-# When creating an application based on a template, use the -p|--param argument to set parameter values defined by the template:
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### Template Parameters
+#### When creating an application based on a template, use the -p|--param argument to set parameter values defined by the template:
+#### ------------------------------------------------------------------------------------------------------
 oc new-app ruby-helloworld-sample \
    -p ADMIN_USERNAME=admin -p ADMIN_PASSWORD=mypassword
 
-# ------------------------------------------------------------------------------------------------------
-# You can store your parameters in a file, then use that file with --param-file when instantiating 
-# a template. If you want to read the parameters from standard input, use --param-file=-:
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### You can store your parameters in a file, then use that file with --param-file when instantiating 
+#### a template. If you want to read the parameters from standard input, use --param-file=-:
+#### ------------------------------------------------------------------------------------------------------
 
 $ cat helloworld.params
 ADMIN_USERNAME=admin
@@ -228,17 +228,17 @@ ADMIN_PASSWORD=mypassword
 $ oc new-app ruby-helloworld-sample --param-file=helloworld.params
 $ cat helloworld.params | oc new-app ruby-helloworld-sample --param-file=-
 
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
 # mostrar os parametros do template
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
 oc process --parameters -f nodejs.json
 
 
-# ------------------------------------------------------------------------------------------------------
-# SPECIFYING ENVIRONMENT VARIABLES
-# ------------------------------------------------------------------------------------------------------
-# When generating applications from a template, source, or an image, you can use the -e|--env argument to 
-# pass environment variables to the application container at run time:
+#### ------------------------------------------------------------------------------------------------------
+#### SPECIFYING ENVIRONMENT VARIABLES
+#### ------------------------------------------------------------------------------------------------------
+#### When generating applications from a template, source, or an image, you can use the -e|--env argument to 
+#### pass environment variables to the application container at run time:
 
 $ oc new-app openshift/postgresql-92-centos7 \
     -e POSTGRESQL_USER=user \
@@ -256,19 +256,19 @@ Additionally, environment variables can be given on standard input by using --en
 $ cat postgresql.env | oc new-app openshift/postgresql-92-centos7 --env-file=-
 
 
-# ------------------------------------------------------------------------------------------------------
-# Part 2: Creating a Template – A Technical Walkthrough
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### Part 2: Creating a Template – A Technical Walkthrough
+#### ------------------------------------------------------------------------------------------------------
 https://blog.openshift.com/part-2-creating-a-template-a-technical-walkthrough/
 
-# explicando template, onde tem o comando delete e a estrutura
+##### explicando template, onde tem o comando delete e a estrutura
 http://v1.uncontained.io/playbooks/fundamentals/template_development_guide.html
 
 https://docs.openshift.com/container-platform/3.11/dev_guide/templates.html#writing-templates
 
-# ------------------------------------------------------------------------------------------------------
-# EXPORT PARA TEMPLATE DE UM OBJETO
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### EXPORT PARA TEMPLATE DE UM OBJETO
+#### ------------------------------------------------------------------------------------------------------
 oc export dc teste --as-template='aa'
 ou 
 oc get --export  dc teste -o yaml
@@ -276,41 +276,41 @@ oc get --export  dc teste -o yaml
 
 
 
-# ------------------------------------------------------------------------------------------------------
-# GIT
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### GIT
+#### ------------------------------------------------------------------------------------------------------
 git add .
 git commit -m 'mensagem'
 git push origin master
 
 
 
-# ------------------------------------------------------------------------------------------------------
-# STEP BY STEP - ESTEIRA CD SOMENTE DEPLOY COM ARQUIVO DE PARAMETROS
-# ------------------------------------------------------------------------------------------------------
+#### ------------------------------------------------------------------------------------------------------
+#### STEP BY STEP - ESTEIRA CD SOMENTE DEPLOY COM ARQUIVO DE PARAMETROS
+#### ------------------------------------------------------------------------------------------------------
 
-# login no openshift e selecionar projeto
+##### login no openshift e selecionar projeto
 oc login https://192.168.0.201:8443 --token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 oc project development
 
-# remover todas as configuracoes no projeto por label 
+##### remover todas as configuracoes no projeto por label 
 oc delete all -l app=marcio
 
-# step 1 - criando aplicacao atraves de template sem build usando parametro
-# parametro do nome da app e que sera usada nas labels tambem
-# template tambem nao tem trigger para configchange
-# primeira vez nao tera pods por nao ter container ainda
+##### step 1 - criando aplicacao atraves de template sem build usando parametro
+##### parametro do nome da app e que sera usada nas labels tambem
+##### template tambem nao tem trigger para configchange
+##### primeira vez nao tera pods por nao ter container ainda
 
-# criando app atraves de file (necessario clonar repositorio antes ou disponibilizar arquivo local)
+##### criando app atraves de file (necessario clonar repositorio antes ou disponibilizar arquivo local)
 oc new-app -f nodejs.json -p NAME=marcio
 
-# ou criar diretamente do git 
+##### ou criar diretamente do git 
 oc new-app -f https://raw.githubusercontent.com/marcioshirai/nodejs-ex/master/openshift/templates/nodejs-cd-basic.json -p NAME=marcio
 
-# listar o dc para confirmar criacao
+##### listar o dc para confirmar criacao
 oc describe deploymentconfig marcio
 
-# publicar imagem no projeto destino do openshift
+##### publicar imagem no projeto destino do openshift
 docker login -u admin -p $(oc whoami -t) 172.30.1.1:5000/development/marcio
 docker tag shirai/development 172.30.1.1:5000/development/marcio:latest
 docker push 172.30.1.1:5000/development/marcio:latest
